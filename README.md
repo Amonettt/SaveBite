@@ -46,13 +46,6 @@ Se utilizó Git como herramienta de control de versiones siguiendo un flujo de t
 - **`feature/historia4`**: Visualización de impacto social
 - **`feature/historia5`**: Panel de administración de base de datos
 
-### Flujo de Trabajo
-
-1. Se creó una rama `feature/historiaN` por cada historia de usuario
-2. Cada rama contiene commits específicos para la funcionalidad correspondiente
-3. Los commits siguen el formato: `feat(historiaN): descripción del cambio`
-4. Cada archivo de código incluye comentarios que identifican la historia de usuario implementada
-5. Las ramas se integraron a `main` mediante merge simulando revisión de código
 
 ### Historial de Commits
 

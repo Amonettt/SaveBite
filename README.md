@@ -22,7 +22,7 @@ Promover un consumo responsable y solidario con impacto social directo, reducien
 
 | Nombre | Rol |
 |--------|-----|
-| Manuela Montoya Patiño | Schoolmaster - Desarrolladora Full Stack |
+| Manuela Montoya Patiño | Scrum master - Desarrolladora Full Stack |
 
 ## Tecnologías
 

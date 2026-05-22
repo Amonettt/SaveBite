@@ -1,12 +1,14 @@
 // Historia de usuario 5: Panel de administración de base de datos
 // Rama: feature/historia5
 // Esta página implementa el panel de visualización de registros de usuarios, ofertas y donaciones
+// Incluye funcionalidad especial para administradores con vista de gestión de usuarios
 import { useState, useEffect } from 'react';
-import { Database, Users, ShoppingBag, Heart, Loader2, Search, ChevronDown, ChevronUp, User, Building2, RefreshCw } from 'lucide-react';
+import { Database, Users, ShoppingBag, Heart, Loader2, Search, ChevronDown, ChevronUp, User, Building2, RefreshCw, Shield } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { Profile, FoodOffer, Donation } from '../types';
 import { useAuth } from '../hooks/useAuth';
 import { Page } from '../types';
+import AdminPanel from '../components/AdminPanel';
 
 interface AdminProps {
   onNavigate: (page: Page) => void;
@@ -15,7 +17,7 @@ interface AdminProps {
 type TabType = 'users' | 'offers' | 'donations';
 
 export default function Admin({ onNavigate }: AdminProps) {
-  const { user, profile } = useAuth();
+  const { user, profile, isAdmin } = useAuth();
   const [activeTab, setActiveTab] = useState<TabType>('users');
   const [users, setUsers] = useState<Profile[]>([]);
   const [offers, setOffers] = useState<FoodOffer[]>([]);
@@ -83,6 +85,34 @@ export default function Admin({ onNavigate }: AdminProps) {
           <Database size={48} className="mx-auto text-gray-300 mb-4" />
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Acceso Restringido</h2>
           <p className="text-gray-500 mb-6">Inicia sesión para acceder a la base de datos.</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Historia de usuario 5: Panel de administración para administradores
+  // Los usuarios con rol admin ven el panel de gestión de usuarios
+  if (isAdmin) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="bg-white border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
+                  <Shield size={24} className="text-gray-800" /> Panel de Administrador
+                </h1>
+                <p className="text-gray-500 text-sm mt-1">Bienvenido, {profile?.full_name || 'Administrador'}</p>
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg">
+                <Shield size={16} />
+                <span className="text-sm font-semibold">Administrador</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <AdminPanel />
         </div>
       </div>
     );

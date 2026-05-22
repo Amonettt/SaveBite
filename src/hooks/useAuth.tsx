@@ -11,6 +11,7 @@ interface AuthContextType {
   session: Session | null;
   profile: Profile | null;
   loading: boolean;
+  isAdmin: boolean;
   signUp: (email: string, password: string, profileData: Partial<Profile>) => Promise<{ error: string | null }>;
   signIn: (email: string, password: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -24,6 +25,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Historia de usuario 5: Detección de usuario administrador
+  // Credenciales por defecto: Manu / 123 (manu@savebite.co)
+  const isAdmin = profile?.role === 'admin' || (user?.email?.toLowerCase() === 'manu@savebite.co' || user?.email?.toLowerCase() === 'manu');
 
   const fetchProfile = async (userId: string) => {
     const { data, error } = await supabase
@@ -90,7 +95,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, profile, loading, signUp, signIn, signOut, refreshProfile }}>
+    <AuthContext.Provider value={{ user, session, profile, loading, isAdmin, signUp, signIn, signOut, refreshProfile }}>
       {children}
     </AuthContext.Provider>
   );

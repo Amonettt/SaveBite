@@ -117,4 +117,32 @@
 
 ### Archivos Relacionados
 
-- `src/pages/Admin.tsx` - Panel de administración con tablas de datos
+- `src/hooks/useAuth.tsx` - Detección de usuario administrador con isAdmin
+- `src/components/AdminPanel.tsx` - Panel de gestión de usuarios con tabla
+- `src/pages/Admin.tsx` - Página que muestra AdminPanel para administradores
+- `src/components/Header.tsx` - Badge y acceso directo para administradores
+- `src/components/AuthModal.tsx` - Credenciales de admin visibles en login
+
+### Credenciales de Administrador por Defecto
+
+- **Usuario**: Manu (o manu@savebite.co)
+- **Contraseña**: 123
+
+El administrador tiene acceso a un panel especial donde puede:
+- Ver todos los usuarios registrados en el sistema
+- Buscar usuarios por nombre, correo o ciudad
+- Ver estadísticas de usuarios por tipo (Usuario, Establecimiento, Admin)
+- Acceder directamente desde el menú de usuario
+
+---
+
+## Resumen de Ramas de Git
+
+| Rama | Historia | Archivos Principales |
+|------|----------|---------------------|
+| `feature/historia1` | Registro e inicio de sesión | useAuth.tsx, AuthModal.tsx |
+| `feature/historia2` | Ofertas de alimentos | Offers.tsx, CreateOffer.tsx, OfferCard.tsx |
+| `feature/historia3` | Sistema de donaciones | Donations.tsx, CreateDonation.tsx, DonationCard.tsx |
+| `feature/historia4` | Impacto social | Impact.tsx |
+| `feature/historia5` | Panel de administración | Admin.tsx, AdminPanel.tsx, Header.tsx, useAuth.tsx |
+

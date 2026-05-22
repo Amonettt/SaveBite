@@ -1,7 +1,7 @@
 // Componente compartido: Header de navegación
 // Referencia: Historias de usuario 1, 2, 3, 5 (navegación y autenticación)
 import { useState } from 'react';
-import { Leaf, Menu, X, LogOut, User, BarChart3, ShoppingBag, Heart, Home, Database, Plus } from 'lucide-react';
+import { Leaf, Menu, X, LogOut, User, BarChart3, ShoppingBag, Heart, Home, Database, Plus, Shield } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { Page } from '../types';
 
@@ -19,7 +19,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Header({ currentPage, onNavigate, onOpenAuth }: HeaderProps) {
-  const { user, profile, signOut } = useAuth();
+  const { user, profile, isAdmin, signOut } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
@@ -85,10 +85,16 @@ export default function Header({ currentPage, onNavigate, onOpenAuth }: HeaderPr
                       <div className="px-3 py-2 border-b border-gray-100">
                         <p className="text-sm font-semibold text-gray-900">{profile?.full_name}</p>
                         <p className="text-xs text-gray-500">{user.email}</p>
-                        <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full ${profile?.role === 'establishment' ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}>
-                          {profile?.role === 'establishment' ? 'Establecimiento' : 'Usuario'}
+                        {/* Historia de usuario 5: Badge de administrador en menú de usuario */}
+                        <span className={`inline-block mt-1 text-xs px-2 py-0.5 rounded-full ${isAdmin ? 'bg-gray-800 text-white' : profile?.role === 'establishment' ? 'bg-amber-100 text-amber-700' : 'bg-green-100 text-green-700'}`}>
+                          {isAdmin ? 'Administrador' : profile?.role === 'establishment' ? 'Establecimiento' : 'Usuario'}
                         </span>
                       </div>
+                      {isAdmin && (
+                        <button onClick={() => { handleNav('admin'); setUserMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
+                          <Shield size={14} /> Panel de Administración
+                        </button>
+                      )}
                       <button onClick={() => { handleNav('create-offer'); setUserMenuOpen(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2">
                         <Plus size={14} /> Publicar oferta
                       </button>

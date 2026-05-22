@@ -88,7 +88,8 @@ export default function CreateDonation({ onNavigate }: CreateDonationProps) {
             <Heart size={32} className="text-rose-500" />
           </div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Donacion publicada</h2>
-          <p className="text-gray-500 mb-6">Tu publicacion ya es visible para la comunidad.</p>
+          {/* Historia de usuario 3: Confirmación de donación con mensaje solidario */}
+          <p className="text-gray-500 mb-6">Tu publicacion ya es visible para la comunidad. Tu generosidad hace la diferencia en la vida de muchos colombianos.</p>
           <div className="flex gap-3">
             <button onClick={() => { setSuccess(false); setForm({ description: '', donation_type: 'food' as DonationType, amount: '', is_offering: true, city: profile?.city || 'Bogota', contact_info: '' }); }} className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50">Publicar otra</button>
             <button onClick={() => onNavigate('donations')} className="flex-1 px-4 py-2.5 bg-rose-500 text-white rounded-xl text-sm font-semibold hover:bg-rose-600">Ver donaciones</button>

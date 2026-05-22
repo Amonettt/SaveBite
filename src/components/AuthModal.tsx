@@ -222,6 +222,13 @@ export default function AuthModal({ onClose, initialMode = 'login' }: AuthModalP
             ) : mode === 'login' ? 'Iniciar Sesión' : 'Crear Cuenta'}
           </button>
 
+          {mode === 'login' && (
+            // Historia de usuario 1: Recordatorio de contraseña
+            <p className="text-center text-xs text-gray-400">
+              Si olvidaste tu contraseña, contacta a hola@savebite.co
+            </p>
+          )}
+
           <p className="text-center text-sm text-gray-500">
             {mode === 'login' ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}{' '}
             <button type="button" onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setErrors({}); setServerError(''); }} className="text-green-600 font-semibold hover:underline">

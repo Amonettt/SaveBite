@@ -2,7 +2,7 @@
 // Rama: feature/historia5
 // Esta página implementa el panel de visualización de registros de usuarios, ofertas y donaciones
 import { useState, useEffect } from 'react';
-import { Database, Users, ShoppingBag, Heart, Loader2, Search, ChevronDown, ChevronUp, User, Building2 } from 'lucide-react';
+import { Database, Users, ShoppingBag, Heart, Loader2, Search, ChevronDown, ChevronUp, User, Building2, RefreshCw } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { Profile, FoodOffer, Donation } from '../types';
 import { useAuth } from '../hooks/useAuth';
@@ -101,10 +101,16 @@ export default function Admin({ onNavigate }: AdminProps) {
               </h1>
               <p className="text-gray-500 text-sm mt-1">Visualización de registros en tiempo real</p>
             </div>
-            <div className="flex items-center gap-3 px-3 py-2 bg-green-50 rounded-lg border border-green-200">
-              {profile?.role === 'establishment' ? <Building2 size={16} className="text-amber-600" /> : <User size={16} className="text-green-600" />}
-              <span className="text-sm font-medium text-gray-700">{profile?.full_name}</span>
+            <div className="flex items-center gap-3">
+              {/* Historia de usuario 5: Botón de recarga para datos en tiempo real */}
+              <button onClick={fetchData} className="p-2 rounded-lg border border-gray-200 text-gray-500 hover:text-green-600 hover:border-green-300 transition-colors" title="Recargar datos">
+                <RefreshCw size={16} />
+              </button>
+              <div className="flex items-center gap-3 px-3 py-2 bg-green-50 rounded-lg border border-green-200">
+                {profile?.role === 'establishment' ? <Building2 size={16} className="text-amber-600" /> : <User size={16} className="text-green-600" />}
+                <span className="text-sm font-medium text-gray-700">{profile?.full_name}</span>
               <span className="text-xs text-gray-500">({profile?.role === 'establishment' ? 'Establecimiento' : 'Usuario'})</span>
+              </div>
             </div>
           </div>
 

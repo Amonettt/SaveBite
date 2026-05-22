@@ -69,6 +69,12 @@ export default function Home({ onNavigate, onOpenAuth }: HomeProps) {
             <p className="text-lg text-green-100 leading-relaxed mb-8 max-w-xl">
               Conectamos establecimientos con excedentes de alimentos con familias y personas vulnerables en toda Colombia. Menos desperdicio, más solidaridad.
             </p>
+            {/* Historia de usuario 1: Mensaje motivacional para registro */}
+            {!user && (
+              <p className="text-sm text-yellow-200 font-medium mb-2">
+                Regístrate gratis y empieza a hacer la diferencia hoy
+              </p>
+            )}
             <div className="flex flex-wrap gap-3">
               <button onClick={() => onNavigate('offers')} className="flex items-center gap-2 px-6 py-3 bg-white text-green-700 font-semibold rounded-xl hover:bg-green-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                 <ShoppingBag size={18} /> Ver Ofertas

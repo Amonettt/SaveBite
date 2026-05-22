@@ -104,6 +104,10 @@ export default function OfferCard({ offer }: OfferCardProps) {
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Package size={13} className="flex-shrink-0" />
             <span>{offer.quantity} {offer.unit} disponibles</span>
+            {/* Historia de usuario 2: Indicador visual de disponibilidad */}
+            {offer.quantity <= 3 && offer.quantity > 0 && (
+              <span className="text-red-500 font-semibold">¡Pocas unidades!</span>
+            )}
           </div>
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <MapPin size={13} className="flex-shrink-0 text-green-500" />

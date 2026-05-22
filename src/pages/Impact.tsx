@@ -141,6 +141,20 @@ export default function Impact() {
         </div>
       </section>
 
+      {/* Historia de usuario 4: Sección de ciudades participantes */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">Ciudades Participantes</h2>
+          <div className="flex flex-wrap justify-center gap-2">
+            {['Bogotá', 'Medellín', 'Cali', 'Barranquilla', 'Cartagena', 'Bucaramanga', 'Pereira', 'Santa Marta', 'Manizales', 'Ibagué', 'Cúcuta', 'Pasto', 'Neiva', 'Armenia', 'Villavicencio', 'Montería', 'Valledupar', 'Popayán', 'Sincelejo', 'Tunja', 'Florencia', 'Riohacha', 'Quibdó', 'Mocoa', 'Yopal', 'Arauca', 'Leticia', 'San José del Guaviare'].map(city => (
+              <span key={city} className="px-3 py-1.5 bg-green-50 text-green-700 text-xs font-medium rounded-full border border-green-200">
+                {city}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 bg-gradient-to-br from-green-50 to-emerald-50">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Heart size={40} className="mx-auto text-rose-400 mb-4" />

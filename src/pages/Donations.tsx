@@ -65,6 +65,7 @@ export default function Donations({ onNavigate, onOpenAuth }: DonationsProps) {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
+            {/* Historia de usuario 3: Botones de filtro por dirección de donación */}
             <button onClick={() => setDirection(direction === 'offering' ? '' : 'offering')} className={`flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${direction === 'offering' ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-600 hover:border-blue-300'}`}>
               <ArrowUpRight size={16} /> Ofrezco Ayuda
             </button>

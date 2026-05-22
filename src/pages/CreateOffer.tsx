@@ -97,7 +97,8 @@ export default function CreateOffer({ onNavigate }: CreateOfferProps) {
             <Package size={32} className="text-green-600" />
           </div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Oferta publicada exitosamente</h2>
-          <p className="text-gray-500 mb-6">Tu oferta ya esta visible para la comunidad.</p>
+          {/* Historia de usuario 2: Confirmación visual de publicación de oferta */}
+          <p className="text-gray-500 mb-6">Tu oferta ya esta visible para la comunidad. Gracias por contribuir a reducir el desperdicio alimentario.</p>
           <div className="flex gap-3">
             <button onClick={() => { setSuccess(false); setForm({ title: '', description: '', category: '' as FoodCategory, offer_type: 'low_price' as OfferType, original_price: '', offer_price: '', quantity: '1', unit: 'unidades', expiry_date: '', city: profile?.city || 'Bogota', address: '' }); }} className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:bg-gray-50">Publicar otra</button>
             <button onClick={() => onNavigate('offers')} className="flex-1 px-4 py-2.5 bg-green-600 text-white rounded-xl text-sm font-semibold hover:bg-green-700">Ver ofertas</button>

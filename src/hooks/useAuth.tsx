@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   // Historia de usuario 5: Detección de usuario administrador
-  // Credenciales por defecto: Manu / 123 (manu@savebite.co)
+  // Credenciales por defecto: Manu / 123456 (manu@savebite.co)
   const isAdmin = profile?.role === 'admin' || (user?.email?.toLowerCase() === 'manu@savebite.co' || user?.email?.toLowerCase() === 'manu');
 
   const fetchProfile = async (userId: string) => {

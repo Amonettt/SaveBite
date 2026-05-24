@@ -126,7 +126,7 @@
 ### Credenciales de Administrador por Defecto
 
 - **Usuario**: Manu (o manu@savebite.co)
-- **Contraseña**: 123
+- **Contraseña**: 123456
 
 El administrador tiene acceso a un panel especial donde puede:
 - Ver todos los usuarios registrados en el sistema

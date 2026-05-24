@@ -102,7 +102,7 @@ export default function AuthModal({ onClose, initialMode = 'login' }: AuthModalP
           {/* Historia de usuario 5: Credenciales de administrador por defecto */}
           {mode === 'login' && (
             <p className="text-xs text-yellow-200 mt-2 bg-white/10 px-3 py-1.5 rounded-lg inline-block">
-              Admin: Manu / 123
+              Admin: Manu / 123456
             </p>
           )}
         </div>

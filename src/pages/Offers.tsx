@@ -40,7 +40,8 @@ export default function Offers({ onNavigate, onOpenAuth }: OffersProps) {
     if (selectedCategory) query = query.eq('category', selectedCategory);
     if (selectedType) query = query.eq('offer_type', selectedType);
 
-    const { data } = await query;
+    const { data, error } = await query;
+    if (error) console.error('Error fetching offers:', error.message);
     setOffers((data as FoodOffer[]) || []);
     setLoading(false);
   };

@@ -39,7 +39,8 @@ export default function Donations({ onNavigate, onOpenAuth }: DonationsProps) {
     if (direction === 'offering') query = query.eq('is_offering', true);
     if (direction === 'needed') query = query.eq('is_offering', false);
 
-    const { data } = await query;
+    const { data, error } = await query;
+    if (error) console.error('Error fetching donations:', error.message);
     setDonations((data as Donation[]) || []);
     setLoading(false);
   };

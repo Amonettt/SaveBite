@@ -123,7 +123,7 @@ export default function Offers({ onNavigate, onOpenAuth }: OffersProps) {
           <>
             <p className="text-sm text-gray-500 mb-4">{filtered.length} oferta{filtered.length !== 1 ? 's' : ''} encontrada{filtered.length !== 1 ? 's' : ''}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filtered.map(offer => <OfferCard key={offer.id} offer={offer} />)}
+              {filtered.map(offer => <OfferCard key={offer.id} offer={offer} onUpdate={fetchOffers} />)}
             </div>
           </>
         )}

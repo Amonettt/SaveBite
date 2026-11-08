@@ -1,11 +1,14 @@
 // Historia de usuario 2: Publicación y visualización de ofertas de alimentos
 // Rama: feature/historia2
 // Este componente implementa la tarjeta visual para cada oferta de alimento
-import { MapPin, Clock, Package, Tag, Building2, User, Utensils, Apple, Croissant, Milk, ShoppingBasket, Beef, Wheat } from 'lucide-react';
+import { useState } from 'react';
+import { MapPin, Clock, Package, Tag, Building2, User, Utensils, Apple, Croissant, Milk, ShoppingBasket, Beef, Wheat, CheckCircle2, Loader2, XCircle } from 'lucide-react';
 import { FoodOffer } from '../types';
+import { supabase } from '../lib/supabase';
 
 interface OfferCardProps {
   offer: FoodOffer;
+  onUpdate?: () => void;
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
@@ -57,9 +60,30 @@ function timeAgo(date: string) {
   return 'hace poco';
 }
 
-export default function OfferCard({ offer }: OfferCardProps) {
+export default function OfferCard({ offer, onUpdate }: OfferCardProps) {
+  const [requesting, setRequesting] = useState(false);
+  const [requested, setRequested] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const typeConfig = OFFER_TYPE_CONFIG[offer.offer_type];
   const daysToExpiry = offer.expiry_date ? Math.ceil((new Date(offer.expiry_date).getTime() - Date.now()) / 86400000) : null;
+
+  const handleRequest = async () => {
+    setRequesting(true);
+    setError(null);
+    const newQty = offer.quantity - 1;
+    const { error: updateError } = await supabase
+      .from('food_offers')
+      .update({ quantity: newQty, status: newQty <= 0 ? 'claimed' : 'active', updated_at: new Date().toISOString() })
+      .eq('id', offer.id);
+    if (updateError) {
+      setError('No se pudo solicitar la oferta. Intenta de nuevo.');
+      setRequesting(false);
+      return;
+    }
+    setRequested(true);
+    setRequesting(false);
+    onUpdate?.();
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden group">
@@ -127,6 +151,29 @@ export default function OfferCard({ offer }: OfferCardProps) {
             <span>{timeAgo(offer.created_at)}</span>
           </div>
         </div>
+
+        {error && (
+          <p className="text-xs text-red-500 mt-2 flex items-center gap-1"><XCircle size={12} /> {error}</p>
+        )}
+
+        {requested ? (
+          <div className="mt-3 w-full py-2.5 bg-green-50 text-green-700 text-sm font-medium rounded-xl flex items-center justify-center gap-2">
+            <CheckCircle2 size={16} /> ¡Solicitud confirmada!
+          </div>
+        ) : offer.status === 'claimed' || offer.quantity <= 0 ? (
+          <div className="mt-3 w-full py-2.5 bg-gray-100 text-gray-400 text-sm font-medium rounded-xl text-center">
+            No disponible
+          </div>
+        ) : (
+          <button
+            onClick={handleRequest}
+            disabled={requesting}
+            className="mt-3 w-full py-2.5 bg-green-600 text-white text-sm font-semibold rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
+          >
+            {requesting ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle2 size={16} />}
+            {requesting ? 'Solicitando...' : 'Solicitar'}
+          </button>
+        )}
       </div>
     </div>
   );

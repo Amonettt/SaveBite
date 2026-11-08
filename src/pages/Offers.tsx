@@ -59,15 +59,9 @@ export default function Offers({ onNavigate, onOpenAuth }: OffersProps) {
               <h1 className="text-2xl font-extrabold text-gray-900">Ofertas de Alimentos</h1>
               <p className="text-gray-500 text-sm mt-1">Productos frescos a bajo costo, gratis o en donación cerca de ti</p>
             </div>
-            {user ? (
-              <button onClick={() => onNavigate('create-offer')} className="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors shadow-md">
-                <Plus size={18} /> Publicar Oferta
-              </button>
-            ) : (
-              <button onClick={() => onOpenAuth('register')} className="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
-                <Plus size={18} /> Publicar Oferta
-              </button>
-            )}
+            <button onClick={() => onNavigate('create-offer')} className="flex items-center gap-2 px-5 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors shadow-md">
+              <Plus size={18} /> Publicar Oferta
+            </button>
           </div>
 
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
@@ -121,15 +115,9 @@ export default function Offers({ onNavigate, onOpenAuth }: OffersProps) {
             <ShoppingBag size={48} className="mx-auto text-gray-300 mb-4" />
             <h3 className="text-lg font-semibold text-gray-700 mb-2">No hay ofertas disponibles</h3>
             <p className="text-gray-400 text-sm mb-6">Sé el primero en publicar una oferta en esta zona.</p>
-            {user ? (
-              <button onClick={() => onNavigate('create-offer')} className="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
-                Publicar Primera Oferta
-              </button>
-            ) : (
-              <button onClick={() => onOpenAuth('register')} className="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
-                Regístrate para Publicar
-              </button>
-            )}
+            <button onClick={() => onNavigate('create-offer')} className="px-6 py-2.5 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
+              Publicar Primera Oferta
+            </button>
           </div>
         ) : (
           <>

@@ -16,8 +16,11 @@ interface FormErrors {
   [key: string]: string;
 }
 
+const DEMO_USER_ID = 'bb679753-d1bc-4055-acd0-fc8d2adea0d9';
+
 export default function CreateOffer({ onNavigate }: CreateOfferProps) {
   const { user, profile } = useAuth();
+  const activeUserId = user?.id || DEMO_USER_ID;
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [success, setSuccess] = useState(false);
@@ -51,11 +54,11 @@ export default function CreateOffer({ onNavigate }: CreateOfferProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !validate()) return;
+    if (!validate()) return;
 
     setLoading(true);
     const insertData = {
-      user_id: user.id,
+      user_id: activeUserId,
       title: form.title.trim(),
       description: form.description.trim(),
       category: form.category,
@@ -77,17 +80,7 @@ export default function CreateOffer({ onNavigate }: CreateOfferProps) {
     else setSuccess(true);
   };
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <div className="text-center">
-          <Package size={48} className="mx-auto text-gray-300 mb-4" />
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Inicia sesion para publicar</h2>
-          <button onClick={() => onNavigate('home')} className="mt-4 text-green-600 hover:underline">Volver al inicio</button>
-        </div>
-      </div>
-    );
-  }
+
 
   if (success) {
     return (
